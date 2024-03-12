@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import styles from './MonthPicker.module.css';
+import '../global.css';
 
 export function MonthPicker(props) {
   const [month, setMonth] = useState(
@@ -80,6 +81,7 @@ export function MonthPicker(props) {
     <div className={styles.pickerContainer}>
       <div className={styles.yearContainer}>
         <button
+          className={styles.button}
           aria-label='Previous Year'
           onClick={(e) => changeYear(year - 1)}
         >
@@ -101,7 +103,11 @@ export function MonthPicker(props) {
         <span aria-description='Year selected' className={styles.bold1}>
           {year}
         </span>
-        <button aria-label='Next Year' onClick={(e) => changeYear(year + 1)}>
+        <button
+          className={styles.button}
+          aria-label='Next Year'
+          onClick={(e) => changeYear(year + 1)}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='24'
@@ -123,7 +129,7 @@ export function MonthPicker(props) {
           return (
             <button
               key={index}
-              className={`${styles.month} ${
+              className={`${styles.month} ${styles.button} ${
                 index == month && props.selected.year == year
                   ? styles.active
                   : null

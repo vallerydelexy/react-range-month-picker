@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './MonthInput.module.css';
+import '../global.css';
 
 export function MonthInput(props) {
   useEffect(() => {
