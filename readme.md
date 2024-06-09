@@ -1,10 +1,10 @@
-# React Lite Month Picker
+# React Range Month Picker
 
 ![https://img.shields.io/npm/dw/react-lite-month-picker](https://img.shields.io/npm/dw/react-lite-month-picker) ![npm](https://img.shields.io/npm/v/react-lite-month-picker) ![GitHub top language](https://img.shields.io/github/languages/top/henripar/react-lite-month-picker) ![GitHub](https://img.shields.io/github/license/henripar/react-lite-month-picker)
 
 Simple, modern and customizable month picker component for ReactJS.
 
-![React Lite Month Picker](https://www.react-lite-month-picker.dev/header-cover.png)
+![React Range Month Picker](https://www.react-lite-month-picker.dev/header-cover.png)
 
 ## Features
 
@@ -20,26 +20,26 @@ Simple, modern and customizable month picker component for ReactJS.
 **Using npm:**
 
 ```bash
-npm install react-lite-month-picker --save
+npm install react-range-month-picker --save
 ```
 
 **Using yarn:**
 
 ```bash
-yarn add react-lite-month-picker
+yarn add react-range-month-picker
 ```
 
 **Using bun:**
 
 ```bash
-bun install react-lite-month-picker
+bun install react-range-month-picker
 ```
 
 ## Usage
 
 ```jsx
 import { useState } from 'react';
-import { MonthPicker, MonthInput } from 'react-lite-month-picker';
+import { MonthPicker, MonthInput } from 'react-range-month-picker';
 
 function Example() {
   const [selectedMonthData, setSelectedMonthData] = useState({
@@ -116,4 +116,4 @@ See full list of supported languages on the [website](https://www.react-lite-mon
 
 ## License
 
-MIT © [henripar](https://github.com/henripar)
+MIT © [rizkiaprita](https://aprita.web.id)

@@ -1,5 +1,5 @@
 {
-  "name": "react-lite-month-picker",
+  "name": "react-range-month-picker",
   "version": "1.2.18",
   "description": "Simple, modern and customizable month picker component for ReactJS.",
   "main": "src/index.js",
@@ -13,13 +13,13 @@
     "month",
     "picker"
   ],
-  "author": "Henri Parviainen",
+  "author": "Rizki Aprita",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/henripar/react-lite-month-picker"
+    "url": "https://github.com/vallerydelexy/react-range-month-picker"
   },
-  "homepage": "https://www.react-lite-month-picker.dev",
+  "homepage": "https://aprita.web.id/react-range-month-picker",
   "peerDependencies": {
     "react": "^18.2.0"
   }
