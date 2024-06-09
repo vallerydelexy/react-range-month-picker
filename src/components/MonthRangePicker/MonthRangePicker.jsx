@@ -5,14 +5,16 @@ import "../global.css";
 
 export function MonthRangePicker(props) {
   const [fromMonth, setFromMonth] = useState(
-    props.selected.fromMonth ? props.selected.fromMonth - 1 : new Date().getMonth()
+    props.selected.fromMonth
+      ? props.selected.fromMonth + 1
+      : new Date().getMonth()
   );
   const [fromYear, setFromYear] = useState(
     props.selected.fromYear ?? new Date().getFullYear()
   );
 
   const [toMonth, setToMonth] = useState(
-    props.selected.toMonth ? props.selected.toMonth - 1 : new Date().getMonth()
+    props.selected.toMonth ? props.selected.toMonth + 1 : new Date().getMonth()
   );
   const [toYear, setToYear] = useState(
     props.selected.toYear ?? new Date().getFullYear()
@@ -20,6 +22,17 @@ export function MonthRangePicker(props) {
 
   const setActiveMonthBgColor = (r, color) => {
     r.style.setProperty("--month-active-bg-color", color);
+  };
+
+  const isWithinRange = (index, fromMonth, toMonth, fromYear, toYear) => {
+    if (fromYear < toYear) {
+      return true; // The range spans across different years
+    } else if (fromYear === toYear) {
+      return index >= fromMonth && index <= toMonth; // The range is within the same year
+    } else {
+      // fromYear > toYear
+      return index >= fromMonth || index <= toMonth; // The range spans across different years
+    }
   };
 
   useEffect(() => {
@@ -47,10 +60,13 @@ export function MonthRangePicker(props) {
     }
   }, [props]);
 
+
+  // TODO: THIS SHOULD NOT SET THE SELECTED YEAR, BUT ONLY CHANGE THE DISPLAYED YEAR
   const changeFromYear = (year) => {
     setFromYear(year);
   };
 
+  // TODO: THIS SHOULD NOT SET THE SELECTED YEAR, BUT ONLY CHANGE THE DISPLAYED YEAR
   const changeToYear = (year) => {
     setToYear(year);
   };
@@ -90,10 +106,16 @@ export function MonthRangePicker(props) {
       fromYear: fromYear,
       toMonth: toMonth + 1,
       toYear: toYear,
-      fromMonthName: fromDate.toLocaleString(props.lang || "en", { month: "long" }),
-      fromMonthShortName: fromDate.toLocaleString(props.lang || "en", { month: "short" }),
+      fromMonthName: fromDate.toLocaleString(props.lang || "en", {
+        month: "long",
+      }),
+      fromMonthShortName: fromDate.toLocaleString(props.lang || "en", {
+        month: "short",
+      }),
       toMonthName: toDate.toLocaleString(props.lang || "en", { month: "long" }),
-      toMonthShortName: toDate.toLocaleString(props.lang || "en", { month: "short" }),
+      toMonthShortName: toDate.toLocaleString(props.lang || "en", {
+        month: "short",
+      }),
     });
   };
 
@@ -152,7 +174,12 @@ export function MonthRangePicker(props) {
           <button
             key={index}
             className={`${styles.month} ${styles.button} ${
-              index === fromMonth && props.selected.fromYear === fromYear ? styles.active : null
+              (index === fromMonth && props.selected.fromYear === fromYear) ||
+              (index === toMonth && props.selected.toYear === toYear)
+                ? styles.active
+                : isWithinRange(index, fromMonth, toMonth, fromYear, toYear)
+                ? styles.range
+                : null
             }`}
             onClick={() => changeFromMonth(index)}
           >
@@ -160,6 +187,7 @@ export function MonthRangePicker(props) {
           </button>
         ))}
       </div>
+
 
       {/* TO YEAR */}
       <div className={styles.yearContainer}>
@@ -214,7 +242,12 @@ export function MonthRangePicker(props) {
           <button
             key={index}
             className={`${styles.month} ${styles.button} ${
-              index === toMonth && props.selected.toYear === toYear ? styles.active : null
+              (index === fromMonth && props.selected.fromYear === fromYear) ||
+              (index === toMonth && props.selected.toYear === toYear)
+                ? styles.active
+                : isWithinRange(index, fromMonth, toMonth, fromYear, toYear)
+                ? styles.range
+                : null
             }`}
             onClick={() => changeToMonth(index)}
           >

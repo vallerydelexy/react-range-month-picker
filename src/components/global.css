@@ -1,7 +1,8 @@
 :root {
   font-family: 'Roboto', sans-serif;
-  --month-active-bg-color: #4ea3983e;
-  --month-hover-bg-color: #f4f4f4;
+  --month-active-text-color:var(--input-bg-color);
+  --month-active-bg-color: #437223;
+  --month-hover-bg-color: #fdf3b4;
   --text-color: #000;
   --month-border-radius: 7px;
   --picker-bg-color: #fff;

@@ -19,6 +19,13 @@
 .active {
   border-radius: var(--month-border-radius);
   background: var(--month-active-bg-color) !important;
+  color: var(--picker-bg-color) !important;
+}
+
+.range {
+  border-radius: var(--month-border-radius);
+  background: var(--month-hover-bg-color) !important;
+  
 }
 
 .yearContainer {
