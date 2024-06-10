@@ -38,33 +38,34 @@ bun install react-range-month-picker
 ## Usage
 
 ```jsx
-import { useState } from 'react';
-import { MonthPicker, MonthInput } from 'react-range-month-picker';
+import { useState } from "react";
+import { MonthRangePicker } from "react-range-month-picker";
 
 function Example() {
-  const [selectedMonthData, setSelectedMonthData] = useState({
-    month: 9,
-    year: 2023,
+  const initialDate = new Date();
+  const [date, setDate] = useState({
+    from: new Date(initialDate.getFullYear(), initialDate.getMonth, 1),
+    to: new Date(initialDate.getFullYear(), initialDate.getMonth, 0),
   });
-  const [isPickerOpen, setIsPickerOpen] = useState(false);
+  const selectedMonthData = {
+    fromMonth: new Date(date.from).getMonth(),
+    fromYear: new Date(date.from).getFullYear(),
+    toMonth: new Date(date.to).getMonth(),
+    toYear: new Date(date.to).getFullYear(),
+  };
+  const setSelectedMonthData = (data) => {
+    setDate({
+      from: new Date(data.fromYear, data.fromMonth, 1),
+      to: new Date(data.toYear, data.toMonth, 0),
+    });
+  };
 
   return (
-    <>
-      <div>
-        <MonthInput
-          selected={selectedMonthData}
-          setShowMonthPicker={setIsPickerOpen}
-          showMonthPicker={isPickerOpen}
-        />
-        {isPickerOpen ? (
-          <MonthPicker
-            setIsOpen={setIsPickerOpen}
-            selected={selectedMonthData}
-            onChange={setSelectedMonthData}
-          />
-        ) : null}
-      </div>
-    </>
+    <MonthRangePicker
+      size="small"
+      selected={selectedMonthData}
+      onChange={setSelectedMonthData}
+    />
   );
 }
 
