@@ -128,137 +128,139 @@ export function MonthRangePicker(props) {
   };
 
   return (
-    <div className={styles.pickerContainer}>
+    <div className={styles.rangePickerContainer}>
       {/* FROM YEAR */}
-      <div className={styles.yearContainer}>
-        <button
-          className={styles.button}
-          aria-label="Previous Year"
-          onClick={() => changeDisplayedFromYear(displayedFromYear - 1)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke={props.textColor || "#000"}
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-chevron-left"
-          >
-            <path d="m15 18-6-6 6-6" />
-          </svg>
-        </button>
-        <span aria-description="Year selected" className={styles.bold1}>
-          {displayedFromYear}
-        </span>
-        <button
-          className={styles.button}
-          aria-label="Next Year"
-          onClick={() => changeDisplayedFromYear(displayedFromYear+1)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke={props.textColor || "#000"}
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-chevron-right"
-          >
-            <path d="m9 18 6-6-6-6" />
-          </svg>
-        </button>
-      </div>
-
-      {/* FROM MONTH */}
-      <div className={styles.monthsContainer}>
-        {getMonthNames(props.lang).map((monthName, index) => (
+      <div className={styles.pickerContainer}>
+        <div className={styles.yearContainer}>
           <button
-            key={index}
-            className={`${styles.month} ${styles.button} ${
-              index === fromMonth && fromYear === displayedFromYear
-                ? styles.active
-                : isWithinRange( displayedFromYear ,index, fromMonth, toMonth, fromYear, toYear)
-                ? styles.range
-                : null
-            }`}
-            onClick={() => changeFromMonth(index)}
+            className={styles.button}
+            aria-label="Previous Year"
+            onClick={() => changeDisplayedFromYear(displayedFromYear - 1)}
           >
-            {monthName}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke={props.textColor || "#000"}
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-chevron-left"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
           </button>
-        ))}
-      </div>
-
-      {/* TO YEAR */}
-      <div className={styles.yearContainer}>
-        <button
-          className={styles.button}
-          aria-label="Previous Year"
-          onClick={() => changeDisplayedToYear(displayedToYear - 1)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke={props.textColor || "#000"}
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-chevron-left"
-          >
-            <path d="m15 18-6-6 6-6" />
-          </svg>
-        </button>
-        <span aria-description="Year selected" className={styles.bold1}>
-          {displayedToYear}
-        </span>
-        <button
-          className={styles.button}
-          aria-label="Next Year"
-          onClick={() => changeDisplayedToYear(displayedToYear + 1)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke={props.textColor || "#000"}
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-chevron-right"
-          >
-            <path d="m9 18 6-6-6-6" />
-          </svg>
-        </button>
-      </div>
-
-      {/* TO MONTH */}
-      <div className={styles.monthsContainer}>
-        {getMonthNames(props.lang).map((monthName, index) => (
+          <span aria-description="Year selected" className={styles.bold1}>
+            {displayedFromYear}
+          </span>
           <button
-            key={index}
-            className={`${styles.month} ${styles.button} ${
-              index === toMonth && toYear === displayedToYear
-                ? styles.active
-                : isWithinRange(displayedToYear, index, fromMonth, toMonth, fromYear, toYear)
-                ? styles.range
-                : null
-            }`}
-            onClick={() => changeToMonth(index)}
+            className={styles.button}
+            aria-label="Next Year"
+            onClick={() => changeDisplayedFromYear(displayedFromYear+1)}
           >
-            {monthName}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke={props.textColor || "#000"}
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-chevron-right"
+            >
+              <path d="m9 18 6-6-6-6" />
+            </svg>
           </button>
-        ))}
+        </div>
+        {/* FROM MONTH */}
+        <div className={styles.monthsContainer}>
+          {getMonthNames(props.lang).map((monthName, index) => (
+            <button
+              key={index}
+              className={`${styles.month} ${styles.button} ${
+                index === fromMonth && fromYear === displayedFromYear
+                  ? styles.active
+                  : isWithinRange( displayedFromYear ,index, fromMonth, toMonth, fromYear, toYear)
+                  ? styles.range
+                  : null
+              }`}
+              onClick={() => changeFromMonth(index)}
+            >
+              {monthName}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.pickerContainer}>
+        {/* TO YEAR */}
+        <div className={styles.yearContainer}>
+          <button
+            className={styles.button}
+            aria-label="Previous Year"
+            onClick={() => changeDisplayedToYear(displayedToYear - 1)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke={props.textColor || "#000"}
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-chevron-left"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+          </button>
+          <span aria-description="Year selected" className={styles.bold1}>
+            {displayedToYear}
+          </span>
+          <button
+            className={styles.button}
+            aria-label="Next Year"
+            onClick={() => changeDisplayedToYear(displayedToYear + 1)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke={props.textColor || "#000"}
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-chevron-right"
+            >
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+        {/* TO MONTH */}
+        <div className={styles.monthsContainer}>
+          {getMonthNames(props.lang).map((monthName, index) => (
+            <button
+              key={index}
+              className={`${styles.month} ${styles.button} ${
+                index === toMonth && toYear === displayedToYear
+                  ? styles.active
+                  : isWithinRange(displayedToYear, index, fromMonth, toMonth, fromYear, toYear)
+                  ? styles.range
+                  : null
+              }`}
+              onClick={() => changeToMonth(index)}
+            >
+              {monthName}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

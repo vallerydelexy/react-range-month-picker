@@ -7,6 +7,7 @@
   --month-border-radius: 7px;
   --picker-bg-color: #fff;
   --picker-padding: 2rem;
+  --range-picker-padding: 0.5rem 1rem 1rem 1rem;
   --year-display-margin-top: 0;
   --year-display-margin-bottom: 1rem;
   --month-select-padding: 1rem;
@@ -14,6 +15,6 @@
   --input-hover-bg-color: #fff;
   --input-text-color: #000;
   --month-input-font-size: 1.5rem;
-  --month-input-width: 277px;
+  --month-input-width: 200px;
   --month-input-padding: 1rem;
 }
