@@ -29,7 +29,7 @@ export function MonthRangePicker(props) {
   function isWithinRange (currentlyDisplayedYear, currentlyDisplayedMonthIndex, fromMonth, toMonth, fromYear, toYear) {
     const currentDate = new Date(currentlyDisplayedYear, currentlyDisplayedMonthIndex, 1);
     const fromDate = new Date(fromYear, fromMonth, 1);
-    const toDate = new Date(toYear, toMonth, 1);
+    const toDate = new Date(toYear, toMonth, 0);
 
     if (isNaN(currentDate.getTime()) || isNaN(fromDate.getTime()) || isNaN(toDate.getTime())) {
       console.error("Invalid date value");

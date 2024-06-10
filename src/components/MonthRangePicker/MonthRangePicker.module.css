@@ -46,6 +46,7 @@
 .rangePickerContainer {
   display: flex;
   position: relative;
+  flex-direction: row;
   padding: var(--range-picker-padding);
   border-radius: 7px;
   border: 1px solid rgb(0 0 0 / 35%);
@@ -53,8 +54,13 @@
   justify-content: center;
   background: var(--picker-bg-color);
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
-  background: var(--picker-bg-color);
-  
+}
+@media screen and (max-width: 640px) {
+  .rangePickerContainer {
+    
+    flex-direction: column;
+    
+  }
 }
 
 .pickerContainer {
