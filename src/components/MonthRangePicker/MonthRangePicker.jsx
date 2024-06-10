@@ -26,20 +26,38 @@ export function MonthRangePicker(props) {
     r.style.setProperty("--month-active-bg-color", color);
   };
 
-  function isWithinRange (currentlyDisplayedYear, currentlyDisplayedMonthIndex, fromMonth, toMonth, fromYear, toYear) {
-    const currentDate = new Date(currentlyDisplayedYear, currentlyDisplayedMonthIndex, 1);
+  function isWithinRange(
+    currentlyDisplayedYear,
+    currentlyDisplayedMonthIndex,
+    fromMonth,
+    toMonth,
+    fromYear,
+    toYear
+  ) {
+    const currentDate = new Date(
+      currentlyDisplayedYear,
+      currentlyDisplayedMonthIndex,
+      1
+    );
     const fromDate = new Date(fromYear, fromMonth, 1);
     const toDate = new Date(toYear, toMonth, 0);
 
-    if (isNaN(currentDate.getTime()) || isNaN(fromDate.getTime()) || isNaN(toDate.getTime())) {
+    if (
+      isNaN(currentDate.getTime()) ||
+      isNaN(fromDate.getTime()) ||
+      isNaN(toDate.getTime())
+    ) {
       console.error("Invalid date value");
       return false;
     }
-    if(currentDate.getTime() < fromDate.getTime() || currentDate.getTime() > toDate.getTime()) {
-      return false
+    if (
+      currentDate.getTime() < fromDate.getTime() ||
+      currentDate.getTime() > toDate.getTime()
+    ) {
+      return false;
     }
-    return true
-  };
+    return true;
+  }
 
   useEffect(() => {
     const r = document.querySelector(":root");
@@ -82,38 +100,43 @@ export function MonthRangePicker(props) {
       month: format,
       timeZone: "UTC",
     });
-    const months = Array.from({ length: 12 }, (_, i) => new Date( new Date().getFullYear(), i+1, 1));
+    const months = Array.from(
+      { length: 12 },
+      (_, i) => new Date(new Date().getFullYear(), i + 1, 1)
+    );
     return months.map((date) => formatter.format(date));
   };
 
   const changeFromMonth = (month) => {
     setFromMonth(month);
     setFromYear(displayedFromYear); // Set the selected year to the displayed year
-    props.setIsOpen(false);
     handleChange(month, displayedFromYear, toMonth, toYear);
   };
 
   const changeToMonth = (month) => {
+    console.log(month)
     setToMonth(month);
     setToYear(displayedToYear); // Set the selected year to the displayed year
-    props.setIsOpen(false);
     handleChange(fromMonth, fromYear, month, displayedToYear);
   };
 
   const handleChange = (fromMonth, fromYear, toMonth, toYear) => {
-    const fromDate = new Date(fromYear, fromMonth);
-    const toDate = new Date(toYear, toMonth);
+    const fromDate = new Date(fromYear, fromMonth, 1);
+    const toDate = new Date(toYear, toMonth, 0);
 
+
+    // console.log(fromDate," - ",toDate)
+    
     if (isNaN(fromDate.getTime()) || isNaN(toDate.getTime())) {
       console.error("Invalid date value");
       return;
     }
 
     props.onChange({
-      fromMonth: fromMonth,
-      fromYear: fromYear,
-      toMonth: toMonth,
-      toYear: toYear,
+      fromMonth,
+      fromYear,
+      toMonth,
+      toYear,
       fromMonthName: fromDate.toLocaleString(props.lang || "en", {
         month: "long",
       }),
@@ -129,8 +152,9 @@ export function MonthRangePicker(props) {
 
   return (
     <div className={styles.rangePickerContainer}>
-      {/* FROM YEAR */}
+      {/* FROM */}
       <div className={styles.pickerContainer}>
+        {/* FROM YEAR */}
         <div className={styles.yearContainer}>
           <button
             className={styles.button}
@@ -158,7 +182,7 @@ export function MonthRangePicker(props) {
           <button
             className={styles.button}
             aria-label="Next Year"
-            onClick={() => changeDisplayedFromYear(displayedFromYear+1)}
+            onClick={() => changeDisplayedFromYear(displayedFromYear + 1)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -184,7 +208,14 @@ export function MonthRangePicker(props) {
               className={`${styles.month} ${styles.button} ${
                 index === fromMonth && fromYear === displayedFromYear
                   ? styles.active
-                  : isWithinRange( displayedFromYear ,index, fromMonth, toMonth, fromYear, toYear)
+                  : isWithinRange(
+                      displayedFromYear,
+                      index,
+                      fromMonth,
+                      toMonth,
+                      fromYear,
+                      toYear
+                    )
                   ? styles.range
                   : null
               }`}
@@ -196,6 +227,7 @@ export function MonthRangePicker(props) {
         </div>
       </div>
 
+      {/* TO */}
       <div className={styles.pickerContainer}>
         {/* TO YEAR */}
         <div className={styles.yearContainer}>
@@ -243,19 +275,27 @@ export function MonthRangePicker(props) {
             </svg>
           </button>
         </div>
+
         {/* TO MONTH */}
         <div className={styles.monthsContainer}>
           {getMonthNames(props.lang).map((monthName, index) => (
             <button
               key={index}
               className={`${styles.month} ${styles.button} ${
-                index === toMonth && toYear === displayedToYear
+                index+1 === toMonth && toYear === displayedToYear
                   ? styles.active
-                  : isWithinRange(displayedToYear, index, fromMonth, toMonth, fromYear, toYear)
+                  : isWithinRange(
+                      displayedToYear,
+                      index+1,
+                      fromMonth,
+                      toMonth,
+                      fromYear,
+                      toYear
+                    )
                   ? styles.range
                   : null
               }`}
-              onClick={() => changeToMonth(index)}
+              onClick={() => changeToMonth(index+1)}
             >
               {monthName}
             </button>
