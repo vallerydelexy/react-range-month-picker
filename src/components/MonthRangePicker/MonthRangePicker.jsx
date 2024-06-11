@@ -287,7 +287,7 @@ export function MonthRangePicker(props) {
                   : isWithinRange(
                       displayedToYear,
                       index+1,
-                      fromMonth,
+                      fromMonth+1,
                       toMonth,
                       fromYear,
                       toYear
